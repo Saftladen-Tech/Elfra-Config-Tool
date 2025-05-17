@@ -88,10 +88,7 @@ def main():
         topic_name = input("  ➕ Thema Name (oder Enter zum Beenden): ").strip()
         if not topic_name:
             break
-        topic_color = input(f"  🎨 Farbe für '{topic_name}' (HEX, z. B. #112233): ").strip()
-        if not is_valid_hex(topic_color):
-            print("❌ Ungültiger HEX-Wert. Bitte versuche es erneut.")
-            continue
+        topic_color = input(f"  🎨 Farbe für '{topic_name}' (Farben in English, z.B. red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, primary): ").strip()
         topics.append({"name": topic_name, "color": topic_color})
 
     ts_code = generate_theme_ts(final_colors, font, font_provider, auth_config, institution_name, institution_web, topics)
