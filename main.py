@@ -71,7 +71,7 @@ def main():
     font_provider = input("🔤 Font Provider (z. B. 'Google Fonts'): ").strip() or "Google Fonts"
 
     institution_name = input("🏢 Institution Name: ").strip() or "Saftladen-Tech"
-    institution_web = input("🌐 Institution Webseite: ").strip() or "https://github.com/Saftladen-Tech"
+    institution_web = input("🌐 Institution Webseite: ").strip() or "github.com/Saftladen-Tech"
 
     auth_config = {"enabled": False}
     auth_config["enabled"] = input("🔐 Usermanagement verwenden? (j/n): ").strip().lower() in ("j", "ja", "y", "yes")
