@@ -40,13 +40,19 @@ def generate_theme_ts(colors: dict, font: str, font_provider: str, auth_config: 
     ts_lines.append("  },")
     ts_lines.append(f"  font: \'{font}\',")
     ts_lines.append(f"  fontProvider: \'{font_provider}\',")
+
     ts_lines.append("  auth: {")
     ts_lines.append(f"    enabled: {str(auth_config['enabled']).lower()},")
     if auth_config['enabled']:
-        ts_lines.append(f"    provider: \'{auth_config['provider']}\',")
-        ts_lines.append(f"    publicKey: \'{auth_config['public_key']}\',")
-        ts_lines.append(f"    secretKey: \'{auth_config['secret_key']}\',")
-        ts_lines.append(f"    server: \'{auth_config['server']}\',")
+        ts_lines.append(f"    oAuth: ,")
+        ts_lines.append(f"      apple: \'{auth_config['apple']}\',")
+        ts_lines.append(f"      google: \'{auth_config['google']}\',")
+        ts_lines.append(f"      github: \'{auth_config['github']}\',")
+        ts_lines.append(f"      keycloak: \'{auth_config['keycloak']}\',")
+        ts_lines.append(f"      microsoft: \'{auth_config['microsoft']}\',")
+        ts_lines.append(f"      discord: \'{auth_config['discord']}\',")
+        ts_lines.append(f"      facebook: \'{auth_config['facebook']}\',")
+        ts_lines.append("    },")
     ts_lines.append("  },")
     ts_lines.append("  institution: {")
     ts_lines.append(f"    name: \'{institution_name}\',")
@@ -77,9 +83,13 @@ def main():
     auth_config["enabled"] = input("🔐 Usermanagement verwenden? (j/n): ").strip().lower() in ("j", "ja", "y", "yes")
     if auth_config["enabled"]:
         auth_config["provider"] = input("  🔑 Auth Provider: ").strip()
-        auth_config["public_key"] = input("  🗝️  Public Key: ").strip()
-        auth_config["secret_key"] = input("  🔒 Secret Key: ").strip()
-        auth_config["server"] = input("  🌐 Server URL: ").strip()
+        auth_config["google"] = input("  Google: ").strip()
+    ###ts_lines.append("// supabase is used for authentication, so you need to set the environment variables SUPABASE_URL and SUPABASE_KEY in your .env file.")
+    ###ts_lines.append("// This means you can only use Authentication, if you have set up a Supabase project.")
+    ###ts_lines.append("// Only set the oAuth provider to true, if you have set up the provider in your Supabase project.")
+    ###ts_lines.append("// If you do not want to use a provider, set it to false.")
+    ###ts_lines.append("   // Chose your oAuth provider, e.g. Google, Facebook, GitHub, Keycloak, etc. Important: You need to set up the provider in your Supabase project.")
+
 
     # Abfrage der Topics
     topics = []

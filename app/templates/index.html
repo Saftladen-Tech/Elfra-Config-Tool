@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Elfra Config Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.generated.css') }}">
+</head>
+<body class="bg-black-900 text-primary-100 font-sans">
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold mt-6">Willkommen beim Elfra Config Tool</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Farben -->
+                {{ form.primary.label }} {{ form.primary(class="form-input") }}
+                {{ form.secondary.label }} {{ form.secondary(class="form-input") }}
+                {{ form.accent.label }} {{ form.accent(class="form-input") }}
+                {{ form.dark.label }} {{ form.dark(class="form-input") }}
+                {{ form.bright.label }} {{ form.bright(class="form-input") }}
+                {{ form.success.label }} {{ form.success(class="form-input") }}
+                {{ form.warn.label }} {{ form.warn(class="form-input") }}
+                {{ form.error.label }} {{ form.error(class="form-input") }}
+                <!-- Schriftart und Provider -->
+                {{ form.font.label }} {{ form.font(class="form-input") }}
+                {{ form.font_provider.label }} {{ form.font_provider(class="form-input") }}
+                <!-- Institution -->
+                {{ form.institution_name.label }} {{ form.institution_name(class="form-input") }}
+                {{ form.institution_web.label }} {{ form.institution_web(class="form-input") }}
+            </div>
+            <!-- Auth-Konfiguration -->
+            <div class="mt-4">
+                <label>{{ form.auth.enabled.label }} {{ form.auth.enabled(id="auth-enabled") }}</label>
+                <div id="auth-fields" style="display:none;" class="mt-2 space-y-2">
+                    {{ form.auth.google.label }} {{ form.auth.google() }}<br>
+                    {{ form.auth.apple.label }} {{ form.auth.apple() }}<br>
+                    {{ form.auth.github.label }} {{ form.auth.github() }}<br>
+                    {{ form.auth.keycloak.label }} {{ form.auth.keycloak() }}<br>
+                    {{ form.auth.microsoft.label }} {{ form.auth.microsoft() }}<br>
+                    {{ form.auth.discord.label }} {{ form.auth.discord() }}<br>
+                    {{ form.auth.facebook.label }} {{ form.auth.facebook() }}<br>
+                </div>
+            </div>
+            <!-- Topics -->
+            <div class="mt-4">
+                <label>Themen:</label>
+                <div id="topics-list">
+                    <!-- Hier werden dynamisch Topic-Felder per JS eingefügt -->
+                    <!-- Platzhalter: -->
+                    <!--
+                    <div>
+                        <input name="topics-0-name" placeholder="Name" />
+                        <input name="topics-0-color" placeholder="Farbe" />
+                    </div>
+                    -->
+                </div>
+                <button type="button" id="add-topic" class="btn">Thema hinzufügen</button>
+            </div>
+            <div class="mt-6">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+        <!-- Nach dem Submit wird die generierte Datei als Download angeboten -->
+        <!-- Platzhalter: Hier wird per Flask-Route die Datei generiert und als Download ausgeliefert -->
+    </div>
+    <script>
+    // Platzhalter: JS zum dynamischen Hinzufügen/Entfernen von Topic-Feldern
+    // Platzhalter: JS zum Anzeigen/Verstecken der Auth-Felder
+    document.addEventListener('DOMContentLoaded', function() {
+        const authEnabled = document.getElementById('auth-enabled');
+        const authFields = document.getElementById('auth-fields');
+        function toggleAuthFields() {
+            authFields.style.display = authEnabled.checked ? 'block' : 'none';
+        }
+        if(authEnabled) {
+            authEnabled.addEventListener('change', toggleAuthFields);
+            toggleAuthFields();
+        }
+    });
+    </script>
+</body>
+</html>
