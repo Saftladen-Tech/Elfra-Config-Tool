@@ -12,18 +12,20 @@
         <form method="POST">
             {{ form.hidden_tag() }}
             <div class="grid grid-cols-2 gap-4">
-                <!-- Farben -->
-                {{ form.primary.label }} {{ form.primary(class="form-input") }}
-                {{ form.secondary.label }} {{ form.secondary(class="form-input") }}
-                {{ form.accent.label }} {{ form.accent(class="form-input") }}
-                {{ form.dark.label }} {{ form.dark(class="form-input") }}
-                {{ form.bright.label }} {{ form.bright(class="form-input") }}
-                {{ form.success.label }} {{ form.success(class="form-input") }}
-                {{ form.warn.label }} {{ form.warn(class="form-input") }}
-                {{ form.error.label }} {{ form.error(class="form-input") }}
+                <!-- Farben aus type "color"-->
+                {{ form.primary.label }} {{ form.primary(type="color", class="form-input") }}
+                {{ form.secondary.label }} {{ form.secondary(type="color", class="form-input") }}
+                {{ form.accent.label }} {{ form.accent(type="color", class="form-input") }}
+                {{ form.dark.label }} {{ form.dark(type="color", class="form-input") }}
+                {{ form.bright.label }} {{ form.bright(type="color", class="form-input") }}
+                {{ form.success.label }} {{ form.success(type="color", class="form-input") }}
+                {{ form.warn.label }} {{ form.warn(type="color", class="form-input") }}
+                {{ form.error.label }} {{ form.error(type="color", class="form-input") }}
                 <!-- Schriftart und Provider -->
+                <br>
                 {{ form.font.label }} {{ form.font(class="form-input") }}
                 {{ form.font_provider.label }} {{ form.font_provider(class="form-input") }}
+                <br>
                 <!-- Institution -->
                 {{ form.institution_name.label }} {{ form.institution_name(class="form-input") }}
                 {{ form.institution_web.label }} {{ form.institution_web(class="form-input") }}
@@ -46,13 +48,10 @@
                 <label>Themen:</label>
                 <div id="topics-list">
                     <!-- Hier werden dynamisch Topic-Felder per JS eingefügt -->
-                    <!-- Platzhalter: -->
-                    <!--
                     <div>
                         <input name="topics-0-name" placeholder="Name" />
                         <input name="topics-0-color" placeholder="Farbe" />
                     </div>
-                    -->
                 </div>
                 <button type="button" id="add-topic" class="btn">Thema hinzufügen</button>
             </div>
@@ -62,10 +61,36 @@
         </form>
         <!-- Nach dem Submit wird die generierte Datei als Download angeboten -->
         <!-- Platzhalter: Hier wird per Flask-Route die Datei generiert und als Download ausgeliefert -->
-    </div>
+        {% if errors %}
+            <div class="text-red-500">
+                {% for field, error_list in errors.items() %}
+                    <div>{{ field }}: {{ error_list|join(', ') }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if ts_code %}
+            <div class="mt-4">
+                <a href="{{ url_for('download_ts_code') }}" class="btn btn-secondary">
+                    TypeScript-Code herunterladen
+                </a>
+            </div>
+        {% endif %}
     <script>
-    // Platzhalter: JS zum dynamischen Hinzufügen/Entfernen von Topic-Feldern
-    // Platzhalter: JS zum Anzeigen/Verstecken der Auth-Felder
+    document.addEventListener('DOMContentLoaded', function() {
+        const addTopicButton = document.getElementById('add-topic');
+        const topicsList = document.getElementById('topics-list');
+        let topicIndex = 1;
+
+        addTopicButton.addEventListener('click', function() {
+            const newTopicDiv = document.createElement('div');
+            newTopicDiv.innerHTML = `
+                <input name="topics-${topicIndex}-name" placeholder="Name" />
+                <input name="topics-${topicIndex}-color" placeholder="Farbe" />
+            `;
+            topicsList.appendChild(newTopicDiv);
+            topicIndex++;
+        });
+    });
     document.addEventListener('DOMContentLoaded', function() {
         const authEnabled = document.getElementById('auth-enabled');
         const authFields = document.getElementById('auth-fields');

@@ -1,4 +1,4 @@
-from flask import render_template, send_file, Flask
+from flask import render_template, send_file, Flask, request
 from app.forms import ConfigForm
 from io import BytesIO
 from flask_wtf import FlaskForm
@@ -40,25 +40,65 @@ def generate_theme_ts(colors, font, font_provider, auth_config, institution_name
 # Flask route to handle the form submission and generate the TypeScript configuration
 @app.route("/", methods=["GET", "POST"])
 def index():
+    #  Logic to handle GET and POST requests 
+    #  Post request will generate TypeScript code based on the form data
     form = ConfigForm()
-    if form.validate_on_submit():
-        
-        
-        # TypeScript-Code generieren
-        ts_code = generate_theme_ts(
-            colors,
-            form.font.data,
-            form.font_provider.data,
-            auth_config,
-            form.institution_name.data,
-            form.institution_web.data,
-            topics
-        )
-        # Datei als Download anbieten
-        return send_file(
-            BytesIO(ts_code.encode("utf-8")),
-            mimetype="text/plain",
-            as_attachment=True,
-            download_name="config.ts"
-        )
+    #  If the form is submitted, validate it and generate the TypeScript code
+    if request.method == "POST":
+ 
+        if form.validate_on_submit():
+            #  Extracting form data
+            colors = {
+                "primary": form.primary.data,
+                "secondary": form.secondary.data,
+                "accent": form.accent.data,
+                "dark": form.dark.data,
+                "bright": form.bright.data,
+                "success": form.success.data,
+                "warn": form.warn.data,
+                "error": form.error.data
+            }
+            auth_config = {
+                "enabled": form.auth.enabled.data,
+                "google": form.auth.google.data,
+                "apple": form.auth.apple.data,
+                "github": form.auth.github.data,
+                "keycloak": form.auth.keycloak.data,
+                "microsoft": form.auth.microsoft.data,
+                "discord": form.auth.discord.data,
+                "facebook": form.auth.facebook.data
+            }
+            institution_name = form.institution_name.data
+            institution_web = form.institution_web.data
+            topics = [{"name": topic.name.data, "color": topic.color.data} for topic in form.topics.entries]
+            font = form.font.data
+            font_provider = form.font_provider.data
+            ts_code = generate_theme_ts(colors, font, font_provider, auth_config, institution_name, institution_web, topics)
+        # Nach dem Submit des TypeScript-Codes direkt als Download anbieten
+            return send_file(
+                BytesIO(ts_code.encode("utf-8")),
+                mimetype="text/plain",
+                as_attachment=True,
+                download_name="config.ts"
+                )
+        else:
+            #  If the form is not valid, render the form with errors
+            return render_template("index.html", form=form, errors=form.errors)
+    else:
+        form.auth.enabled.data = False
+        form.auth.google.data = True
+        form.auth.apple.data = True
+        form.auth.github.data = True
+        form.auth.keycloak.data = True
+        form.auth.microsoft.data = True
+        form.auth.discord.data = True
+        form.auth.facebook.data = True
+        form.font.data = ""
+        form.font_provider.data = ""
+        form.institution_name.data = ""
+        form.institution_web.data = ""
+        form.topics.append_entry()
+        form.topics.entries[0].name = "Setup Topic"
+        form.topics.entries[0].color = "#FF5733"  # Example color value
+
     return render_template("index.html", form=form)
