@@ -10,10 +10,11 @@
     <div class="container mx-auto px-4">
         <h1 class="text-3xl font-bold mt-6">Willkommen beim Elfra Config Tool</h1>
         <form method="POST">
-            {{ form.hidden_tag() }}
+            <!---{{ form.hidden_tag() }}-->
+            {{ form.csrf_token }}
             <div class="grid grid-cols-2 gap-4">
                 <!-- Farben aus type "color"-->
-                {{ form.primary.label }} {{ form.primary(type="color", class="form-input") }}
+                {{ form.primary.label }} {{ form.primary(type="color", class="form-input", ) }}
                 {{ form.secondary.label }} {{ form.secondary(type="color", class="form-input") }}
                 {{ form.accent.label }} {{ form.accent(type="color", class="form-input") }}
                 {{ form.dark.label }} {{ form.dark(type="color", class="form-input") }}
@@ -23,12 +24,12 @@
                 {{ form.error.label }} {{ form.error(type="color", class="form-input") }}
                 <!-- Schriftart und Provider -->
                 <br>
-                {{ form.font.label }} {{ form.font(class="form-input") }}
-                {{ form.font_provider.label }} {{ form.font_provider(class="form-input") }}
+                {{ form.font.label }} {{ form.font(class="form-input", placeholder="Roboto") }}
+                {{ form.font_provider.label }} {{ form.font_provider(class="form-input", placeholder="Google Fonts") }}
                 <br>
                 <!-- Institution -->
-                {{ form.institution_name.label }} {{ form.institution_name(class="form-input") }}
-                {{ form.institution_web.label }} {{ form.institution_web(class="form-input") }}
+                {{ form.institution_name.label }} {{ form.institution_name(class="form-input", placeholder="Saftladen Tech") }}
+                {{ form.institution_web.label }} {{ form.institution_web(class="form-input", placeholder="https://www.github.com/Saftladen-Tech/Elfra") }}
             </div>
             <!-- Auth-Konfiguration -->
             <div class="mt-4">
@@ -49,30 +50,48 @@
                 <div id="topics-list">
                     <!-- Hier werden dynamisch Topic-Felder per JS eingefügt -->
                     <div>
-                        <input name="topics-0-name" placeholder="Name" />
-                        <input name="topics-0-color" placeholder="Farbe" />
+                        <input name="topics-0-topic" placeholder="Name" />
+                        <select name="topics-0-color">
+                            <option value="amber">Amber</option>
+                            <option value="blue">Blau</option>
+                            <option value="cyan">Cyan</option>
+                            <option value="emerald">Emeraude</option>
+                            <option value="fuchsia">Fuchsia</option>
+                            <option value="gray">Grau</option>
+                            <option value="green">Grün</option>
+                            <option value="indigo">Indigo</option>
+                            <option value="lime">Limette</option>
+                            <option value="neutral">Neutral</option>
+                            <option value="orange">Orange</option>
+                            <option value="pink">Rosa</option>
+                            <option value="purple">Lila</option>
+                            <option value="red">Rot</option>
+                            <option value="rose">Rosen</option>
+                            <option value="sky">Himmel</option>
+                            <option value="slate">Schiefer</option>
+                            <option value="stone">Stein</option>
+                            <option value="teal">Teal</option>
+                            <option value="violet">Violett</option>
+                            <option value="yellow">Gelb</option>
+                            <option value="zinc">Zink</option>
+                        </select>
                     </div>
                 </div>
                 <button type="button" id="add-topic" class="btn">Thema hinzufügen</button>
             </div>
+            <!-- Mit dem Submit wird die generierte Datei gespeichert -->
+            <!-- Platzhalter: Hier wird per Flask-Route die Datei generiert und als Download ausgeliefert -->
             <div class="mt-6">
-                {{ form.submit(class="btn btn-primary") }}
+                {{ form.submit(class="btn btn-primary") }} 
+                <input type="submit" value="GO" />
             </div>
         </form>
-        <!-- Nach dem Submit wird die generierte Datei als Download angeboten -->
-        <!-- Platzhalter: Hier wird per Flask-Route die Datei generiert und als Download ausgeliefert -->
+
         {% if errors %}
             <div class="text-red-500">
                 {% for field, error_list in errors.items() %}
                     <div>{{ field }}: {{ error_list|join(', ') }}</div>
                 {% endfor %}
-            </div>
-        {% endif %}
-        {% if ts_code %}
-            <div class="mt-4">
-                <a href="{{ url_for('download_ts_code') }}" class="btn btn-secondary">
-                    TypeScript-Code herunterladen
-                </a>
             </div>
         {% endif %}
     <script>
@@ -84,8 +103,31 @@
         addTopicButton.addEventListener('click', function() {
             const newTopicDiv = document.createElement('div');
             newTopicDiv.innerHTML = `
-                <input name="topics-${topicIndex}-name" placeholder="Name" />
-                <input name="topics-${topicIndex}-color" placeholder="Farbe" />
+                <input name="topics-${topicIndex}-topic" placeholder="Name" />
+                <select name="topics-${topicIndex}-color">
+                    <option value="amber">Amber</option>
+                    <option value="blue">Blau</option>
+                    <option value="cyan">Cyan</option>
+                    <option value="emerald">Emeraude</option>
+                    <option value="fuchsia">Fuchsia</option>
+                    <option value="gray">Grau</option>
+                    <option value="green">Grün</option>
+                    <option value="indigo">Indigo</option>
+                    <option value="lime">Limette</option>
+                    <option value="neutral">Neutral</option>
+                    <option value="orange">Orange</option>
+                    <option value="pink">Rosa</option>
+                    <option value="purple">Lila</option>
+                    <option value="red">Rot</option>
+                    <option value="rose">Rosen</option>
+                    <option value="sky">Himmel</option>
+                    <option value="slate">Schiefer</option>
+                    <option value="stone">Stein</option>
+                    <option value="teal">Teal</option>
+                    <option value="violet">Violett</option>
+                    <option value="yellow">Gelb</option>
+                    <option value="zinc">Zink</option>
+                </select>
             `;
             topicsList.appendChild(newTopicDiv);
             topicIndex++;

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, FormField, FieldList, SubmitField
+from wtforms import StringField, BooleanField, FormField, FieldList, SubmitField, SelectField
 from wtforms.validators import DataRequired, Optional
 
 class AuthConfigForm(FlaskForm):
@@ -14,8 +14,31 @@ class AuthConfigForm(FlaskForm):
     # Weitere Felder für andere Provider nach Bedarf
 
 class TopicForm(FlaskForm):
-    name = StringField('Name', validators=[Optional()])
-    color = StringField('Farbe', validators=[Optional()])
+    topic = StringField('Name', validators=[Optional()])
+    color = SelectField('Farbe', choices=[
+        ('amber'),
+        ('blue'),
+        ('cyan'),
+        ('emerald'),
+        ('fuchsia'),
+        ('gray'),
+        ('green'),
+        ('indigo'),
+        ('lime'),
+        ('neutral'),
+        ('orange'),
+        ('pink'),
+        ('purple'),
+        ('red'),
+        ('rose'),
+        ('sky'),
+        ('slate'),
+        ('stone'),
+        ('teal'),
+        ('violet'),
+        ('yellow'),
+        ('zinc'),
+    ], validators=[Optional()])
 
 class ConfigForm(FlaskForm):
     primary = StringField('Primary', validators=[DataRequired()])

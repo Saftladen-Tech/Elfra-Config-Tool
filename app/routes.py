@@ -45,7 +45,7 @@ def index():
     form = ConfigForm()
     #  If the form is submitted, validate it and generate the TypeScript code
     if request.method == "POST":
- 
+        print("Post startet")
         if form.validate_on_submit():
             #  Extracting form data
             colors = {
@@ -70,7 +70,7 @@ def index():
             }
             institution_name = form.institution_name.data
             institution_web = form.institution_web.data
-            topics = [{"name": topic.name.data, "color": topic.color.data} for topic in form.topics.entries]
+            topics = [{"name": topic.topic.data, "color": topic.color.data} for topic in form.topics.entries]
             font = form.font.data
             font_provider = form.font_provider.data
             ts_code = generate_theme_ts(colors, font, font_provider, auth_config, institution_name, institution_web, topics)
@@ -98,7 +98,7 @@ def index():
         form.institution_name.data = ""
         form.institution_web.data = ""
         form.topics.append_entry()
-        form.topics.entries[0].name = "Setup Topic"
+        form.topics.entries[0].topic = "Setup Topic"
         form.topics.entries[0].color = "#FF5733"  # Example color value
 
     return render_template("index.html", form=form)
