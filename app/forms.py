@@ -15,30 +15,7 @@ class AuthConfigForm(FlaskForm):
 
 class TopicForm(FlaskForm):
     topic = StringField('Name', validators=[Optional()])
-    color = SelectField('Farbe', choices=[
-        ('amber'),
-        ('blue'),
-        ('cyan'),
-        ('emerald'),
-        ('fuchsia'),
-        ('gray'),
-        ('green'),
-        ('indigo'),
-        ('lime'),
-        ('neutral'),
-        ('orange'),
-        ('pink'),
-        ('purple'),
-        ('red'),
-        ('rose'),
-        ('sky'),
-        ('slate'),
-        ('stone'),
-        ('teal'),
-        ('violet'),
-        ('yellow'),
-        ('zinc'),
-    ], validators=[Optional()])
+    color = SelectField('Farbe', validators=[Optional()])
 
 class ConfigForm(FlaskForm):
     primary = StringField('Primary', validators=[DataRequired()])
