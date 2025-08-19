@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Elfra Config Tool{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.generated.css') }}">
+</head>
+<body class="flex flex-col min-h-screen bg-gray-500">
+    <!-- Header -->
+    <header class="flex items-center justify-center space-x-5 mt-20">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="w-24 h-24 rounded-full" />
+        <h1 class="text-6xl font-bold">Elfra Config Tool</h1>
+    </header>
+    <!-- Body/Main -->
+    <main class="flex flex-col w-full max-w-5xl mx-auto mt-8 grow p-8 rounded-lg shadow-lg">
+        {% block content %}
+        <!-- Seiteninhalt -->
+        {% endblock %}
+    </main>
+    <!-- Footer -->
+    <footer class="flex justify-center items-center w-full text-xs text-gray-400 py-4">
+        <p class="text-center space-x-1">
+            <a href="https://github.com/Saftladen-Tech/Elfra-Config-Tool" class="hover:underline" target="_blank" rel="noopener noreferrer">
+                Elfra Config Tool
+            </a>
+            using
+            <a href="https://github.com/Saftladen-Tech/Elfra" class="hover:underline" target="_blank" rel="noopener noreferrer">
+                Elfra Framework
+            </a>
+            - MIT Licensed
+        </p>
+    </footer>
+</body>
+</html>

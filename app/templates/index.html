@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Elfra Config Tool</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.generated.css') }}">
-</head>
-<body class="bg-black-900 text-primary-100 font-sans">
-    <div class="container mx-auto px-4">
+{% extends "base.html" %}
+{% block content %}
+<body>
+    <div class="container">
         <h1 class="text-3xl font-bold mt-6">Willkommen beim Elfra Config Tool</h1>
         <form method="POST">
             <!---{{ form.hidden_tag() }}-->
@@ -146,4 +140,4 @@
     });
     </script>
 </body>
-</html>
+{% endblock %}
