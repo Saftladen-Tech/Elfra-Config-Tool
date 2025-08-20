@@ -3,7 +3,7 @@ from wtforms import StringField, BooleanField, FormField, FieldList, SubmitField
 from wtforms.validators import DataRequired, Optional
 
 class AuthConfigForm(FlaskForm):
-    enabled = BooleanField('Usermanagement verwenden?', validators=[Optional()])
+    enabled = BooleanField('Use usermanagement?', validators=[Optional()])
     google = BooleanField('Google', validators=[Optional()])
     apple = BooleanField('Apple', validators=[Optional()])
     github = BooleanField('GitHub', validators=[Optional()])
@@ -15,7 +15,32 @@ class AuthConfigForm(FlaskForm):
 
 class TopicForm(FlaskForm):
     topic = StringField('Name', validators=[Optional()])
-    color = SelectField('Farbe', validators=[Optional()])
+    color = SelectField(
+        'Farbe', 
+        choices=[('amber', 'Amber'),
+                 ('blue', 'Blau'),
+                 ('cyan', 'Cyan'),
+                 ('emerald', 'Emeraude'),
+                 ('fuchsia', 'Fuchsia'),
+                 ('gray', 'Grau'),
+                 ('green', 'Grün'),
+                 ('indigo', 'Indigo'),
+                 ('lime', 'Limette'),
+                 ('neutral', 'Neutral'),
+                 ('orange', 'Orange'),
+                 ('pink', 'Rosa'),
+                 ('purple', 'Lila'),
+                 ('red', 'Rot'),
+                 ('rose', 'Rosen'),
+                 ('sky', 'Himmel'),
+                 ('slate', 'Schiefer'),
+                 ('stone', 'Stein'),
+                 ('teal', 'Teal'),
+                 ('violet', 'Violett'),
+                 ('yellow', 'Gelb'),
+                 ('zinc', 'Zink')
+                 ],
+        validators=[Optional()])
 
 class ConfigForm(FlaskForm):
     primary = StringField('Primary', validators=[DataRequired()])

@@ -2,33 +2,33 @@
 {% block content %}
 <body>
     <div class="container">
-        <h1 class="text-3xl font-bold mt-6">Willkommen beim Elfra Config Tool</h1>
+        <h1 class="text-3xl font-bold mt-6">Welcome to Elfra Config Tool</h1>
         <form method="POST">
             <!---{{ form.hidden_tag() }}-->
             {{ form.csrf_token }}
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-3 gap-1.5">
                 <!-- Farben aus type "color"-->
-                {{ form.primary.label }} {{ form.primary(type="color", class="form-input", ) }}
-                {{ form.secondary.label }} {{ form.secondary(type="color", class="form-input") }}
-                {{ form.accent.label }} {{ form.accent(type="color", class="form-input") }}
-                {{ form.dark.label }} {{ form.dark(type="color", class="form-input") }}
-                {{ form.bright.label }} {{ form.bright(type="color", class="form-input") }}
-                {{ form.success.label }} {{ form.success(type="color", class="form-input") }}
-                {{ form.warn.label }} {{ form.warn(type="color", class="form-input") }}
-                {{ form.error.label }} {{ form.error(type="color", class="form-input") }}
+                <div class="flex justify-between pr-24">{{ form.primary.label }} {{ form.primary(type="color", value="#669c35", class="form-input") }}</div>
+                <div class="flex justify-between pr-24">{{ form.secondary.label }} {{ form.secondary(type="color", value="#aaaaaa", class="form-input") }}</div>
+                <div class="flex justify-between pr-24">{{ form.accent.label }} {{ form.accent(type="color", value="#fde1af", class="form-input") }}</div>
+                <div class="flex justify-between pr-24">{{ form.dark.label }} {{ form.dark(type="color", value="#0e0e11", class="form-input") }}</div>
+                <div class="flex justify-between pr-24">{{ form.bright.label }} {{ form.bright(type="color", value="#ffffff", class="form-input") }}</div>
+                <div class="flex justify-between pr-24">{{ form.success.label }} {{ form.success(type="color", value="#00dc82", class="form-input") }}</div>
+                <div class="flex justify-between pr-24">{{ form.warn.label }} {{ form.warn(type="color", value="#fcc800", class="form-input") }}</div>
+                <div class="flex justify-between pr-24">{{ form.error.label }} {{ form.error(type="color", value="#ff6467", class="form-input") }}</div>
                 <!-- Schriftart und Provider -->
                 <br>
-                {{ form.font.label }} {{ form.font(class="form-input", placeholder="Roboto") }}
-                {{ form.font_provider.label }} {{ form.font_provider(class="form-input", placeholder="Google Fonts") }}
+                <div>{{ form.font.label }}<br> {{ form.font(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Roboto") }}</div>
+                <div>{{ form.font_provider.label }} {{ form.font_provider(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Google Fonts") }}</div>
                 <br>
                 <!-- Institution -->
-                {{ form.institution_name.label }} {{ form.institution_name(class="form-input", placeholder="Saftladen Tech") }}
-                {{ form.institution_web.label }} {{ form.institution_web(class="form-input", placeholder="https://www.github.com/Saftladen-Tech/Elfra") }}
+                <div>{{ form.institution_name.label }} {{ form.institution_name(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Saftladen Tech") }}</div>
+                <div>{{ form.institution_web.label }} {{ form.institution_web(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="https://www.github.com/Saftladen-Tech/Elfra") }}</div>
             </div>
             <!-- Auth-Konfiguration -->
             <div class="mt-4">
                 <label>{{ form.auth.enabled.label }} {{ form.auth.enabled(id="auth-enabled") }}</label>
-                <div id="auth-fields" style="display:none;" class="mt-2 space-y-2">
+                <div id="auth-fields" style="display:none;" class="grid grid-cols-2 mt-2 space-y-2">
                     {{ form.auth.google.label }} {{ form.auth.google() }}<br>
                     {{ form.auth.apple.label }} {{ form.auth.apple() }}<br>
                     {{ form.auth.github.label }} {{ form.auth.github() }}<br>
@@ -40,12 +40,12 @@
             </div>
             <!-- Topics -->
             <div class="mt-4">
-                <label>Themen:</label>
+                <label>Course name:</label>
                 <div id="topics-list">
                     <!-- Hier werden dynamisch Topic-Felder per JS eingefügt -->
-                    <div>
-                        <input name="topics-0-topic" placeholder="Name" />
-                        <select name="topics-0-color">
+                    <div class="">
+                        <input name="topics-0-topic" placeholder="Name" class="bg-gray-400 rounded-md px-1 placeholder:text-gray-600"/>
+                        <select name="topics-0-color" class="bg-gray-400 rounded-md px-1 text-gray-600">
                             <option value="amber">Amber</option>
                             <option value="blue">Blau</option>
                             <option value="cyan">Cyan</option>
@@ -71,13 +71,12 @@
                         </select>
                     </div>
                 </div>
-                <button type="button" id="add-topic" class="btn">Thema hinzufügen</button>
+                <button type="button" id="add-topic" class="btn bg-gray-400 rounded-md px-2 my-2 text-gray-600">Add Course</button>
             </div>
             <!-- Mit dem Submit wird die generierte Datei gespeichert -->
             <!-- Platzhalter: Hier wird per Flask-Route die Datei generiert und als Download ausgeliefert -->
             <div class="mt-6">
-                {{ form.submit(class="btn btn-primary") }} 
-                <input type="submit" value="GO" />
+                {{ form.submit(class="btn btn-primary bg-gray-400 rounded-md px-2 my-2 text-gray-600") }} 
             </div>
         </form>
 
@@ -97,8 +96,8 @@
         addTopicButton.addEventListener('click', function() {
             const newTopicDiv = document.createElement('div');
             newTopicDiv.innerHTML = `
-                <input name="topics-${topicIndex}-topic" placeholder="Name" />
-                <select name="topics-${topicIndex}-color">
+                <input name="topics-${topicIndex}-topic" placeholder="Name" class="bg-gray-400 rounded-md px-1 placeholder:text-gray-600 mt-2"/>
+                <select name="topics-${topicIndex}-color" class="bg-gray-400 rounded-md px-1 text-gray-600 mt-2">
                     <option value="amber">Amber</option>
                     <option value="blue">Blau</option>
                     <option value="cyan">Cyan</option>
