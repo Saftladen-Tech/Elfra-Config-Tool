@@ -23,8 +23,15 @@ def generate_theme_ts(colors, font, font_provider, auth_config, institution_name
     ts_lines.append(f"  font: '{font}',")
     ts_lines.append(f"  fontProvider: '{font_provider}',")
     ts_lines.append("  auth: {")
-    for key, value in auth_config.items():
-        ts_lines.append(f"    {key}: {str(value).lower()},")
+    ts_lines.append("// supabase is used for authentication, so you need to set the environment variables SUPABASE_URL and SUPABASE_KEY in your .env file.")
+    ts_lines.append("// This means you can only use Authentication, if you have set up a Supabase project.")
+    ts_lines.append(f"    enabled: {str(auth_config['enabled']).lower()},")
+    if auth_config['enabled']:
+        ts_lines.append("    oAuth: {")
+        for provider in ['apple', 'google', 'github', 'keycloak', 'microsoft', 'discord', 'facebook']:
+            if auth_config[provider]:
+                ts_lines.append(f"      {provider}: true,")
+        ts_lines.append("    },")
     ts_lines.append("  },")
     ts_lines.append("  institution: {")
     ts_lines.append(f"    name: '{institution_name}',")

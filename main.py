@@ -44,7 +44,7 @@ def generate_theme_ts(colors: dict, font: str, font_provider: str, auth_config: 
     ts_lines.append("  auth: {")
     ts_lines.append(f"    enabled: {str(auth_config['enabled']).lower()},")
     if auth_config['enabled']:
-        ts_lines.append(f"    oAuth: ,")
+        ts_lines.append(f"    oAuth: {")
         ts_lines.append(f"      apple: \'{auth_config['apple']}\',")
         ts_lines.append(f"      google: \'{auth_config['google']}\',")
         ts_lines.append(f"      github: \'{auth_config['github']}\',")
