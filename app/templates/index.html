@@ -16,26 +16,26 @@
                 <div class="flex justify-between pr-24">{{ form.success.label }} {{ form.success(type="color", value="#00dc82", class="form-input") }}</div>
                 <div class="flex justify-between pr-24">{{ form.warn.label }} {{ form.warn(type="color", value="#fcc800", class="form-input") }}</div>
                 <div class="flex justify-between pr-24">{{ form.error.label }} {{ form.error(type="color", value="#ff6467", class="form-input") }}</div>
+            </div>
                 <!-- Schriftart und Provider -->
-                <br>
-                <div>{{ form.font.label }}<br> {{ form.font(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Roboto") }}</div>
-                <div>{{ form.font_provider.label }} {{ form.font_provider(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Google Fonts") }}</div>
-                <br>
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-1.5 py-2">
+                <div class="flex justify-between mr-20">{{ form.font.label }} {{ form.font(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Roboto") }}</div>
+                <div class="flex justify-between mr-20">{{ form.font_provider.label }} {{ form.font_provider(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Google Fonts") }}</div>
                 <!-- Institution -->
-                <div>{{ form.institution_name.label }} {{ form.institution_name(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Saftladen Tech") }}</div>
-                <div>{{ form.institution_web.label }} {{ form.institution_web(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="https://www.github.com/Saftladen-Tech/Elfra") }}</div>
+                <div class="flex justify-between mr-20">{{ form.institution_name.label }} {{ form.institution_name(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Saftladen Tech") }}</div>
+                <div class="flex justify-between mr-20">{{ form.institution_web.label }} {{ form.institution_web(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="https://www.github.com/Saftladen-Tech/Elfra") }}</div>
             </div>
             <!-- Auth-Konfiguration -->
             <div class="mt-4">
                 <label>{{ form.auth.enabled.label }} {{ form.auth.enabled(id="auth-enabled") }}</label>
-                <div id="auth-fields" style="display:none;" class="grid grid-cols-2 mt-2 space-y-2">
-                    {{ form.auth.google.label }} {{ form.auth.google() }}<br>
-                    {{ form.auth.apple.label }} {{ form.auth.apple() }}<br>
-                    {{ form.auth.github.label }} {{ form.auth.github() }}<br>
-                    {{ form.auth.keycloak.label }} {{ form.auth.keycloak() }}<br>
-                    {{ form.auth.microsoft.label }} {{ form.auth.microsoft() }}<br>
-                    {{ form.auth.discord.label }} {{ form.auth.discord() }}<br>
-                    {{ form.auth.facebook.label }} {{ form.auth.facebook() }}<br>
+                <div id="auth-fields" style="display:none;" class="grid grid-cols-2 mt-2 space-y-1">
+                    <div class="flex justify-between w-1/8">{{ form.auth.google.label }} {{ form.auth.google() }}</div>
+                    <div class="flex justify-between w-1/8">{{ form.auth.apple.label }} {{ form.auth.apple() }}</div>
+                    <div class="flex justify-between w-1/8">{{ form.auth.github.label }} {{ form.auth.github() }}</div>
+                    <div class="flex justify-between w-1/8 ">{{ form.auth.keycloak.label }} {{ form.auth.keycloak() }}</div>
+                    <div class="flex justify-between w-1/8">{{ form.auth.microsoft.label }} {{ form.auth.microsoft() }}</div>
+                    <div class="flex justify-between w-1/8">{{ form.auth.discord.label }} {{ form.auth.discord() }}</div>
+                    <div class="flex justify-between w-1/8">{{ form.auth.facebook.label }} {{ form.auth.facebook() }}</div>
                 </div>
             </div>
             <!-- Topics -->
@@ -71,12 +71,12 @@
                         </select>
                     </div>
                 </div>
-                <button type="button" id="add-topic" class="btn bg-gray-400 rounded-md px-2 my-2 text-gray-600">Add Course</button>
+                <button type="button" id="add-topic" class="btn bg-gray-400 rounded-md px-2 my-2 text-black">Add Course</button>
             </div>
             <!-- Mit dem Submit wird die generierte Datei gespeichert -->
             <!-- Platzhalter: Hier wird per Flask-Route die Datei generiert und als Download ausgeliefert -->
             <div class="mt-6">
-                {{ form.submit(class="btn btn-primary bg-gray-400 rounded-md px-2 my-2 text-gray-600") }} 
+                {{ form.submit(class="btn btn-primary bg-gray-400 rounded-md px-2 my-2 text-black") }} 
             </div>
         </form>
 

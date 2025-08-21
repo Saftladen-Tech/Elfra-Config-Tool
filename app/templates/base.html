@@ -8,18 +8,18 @@
 </head>
 <body class="flex flex-col min-h-screen text-white bg-gray-800">
     <!-- Header -->
-    <header class="flex items-center justify-center space-x-5 mt-20">
+    <header class="flex items-center justify-center space-x-5 mt-16">
         <img src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="Logo" class="w-24 h-24 rounded-full" />
         <h1 class="text-6xl font-bold">Elfra Config Tool</h1>
     </header>
     <!-- Body/Main -->
-    <main class="w-full max-w-5xl mx-auto mt-8 p-8 rounded-lg shadow-lg">
+    <main class="flex mx-auto mt-8 rounded-lg shadow-lg">
         {% block content %}
         <!-- Seiteninhalt -->
         {% endblock %}
     </main>
     <!-- Footer -->
-    <footer class="flex justify-center items-center w-full text-xs text-gray-400 py-4">
+    <footer class="flex justify-center items-center w-full text-xs text-gray-400 py-8">
         <p class="text-center space-x-1">
             <a href="https://github.com/Saftladen-Tech/Elfra-Config-Tool" class="hover:underline" target="_blank" rel="noopener noreferrer">
                 Elfra Config Tool

@@ -28,9 +28,13 @@ def generate_theme_ts(colors, font, font_provider, auth_config, institution_name
     ts_lines.append(f"    enabled: {str(auth_config['enabled']).lower()},")
     if auth_config['enabled']:
         ts_lines.append("    oAuth: {")
-        for provider in ['apple', 'google', 'github', 'keycloak', 'microsoft', 'discord', 'facebook']:
-            if auth_config[provider]:
-                ts_lines.append(f"      {provider}: true,")
+        ts_lines.append(f"      google: {str(auth_config['google']).lower()},")
+        ts_lines.append(f"      apple: {str(auth_config['apple']).lower()},")
+        ts_lines.append(f"      github: {str(auth_config['github']).lower()},")
+        ts_lines.append(f"      keycloak: {str(auth_config['keycloak']).lower()},")
+        ts_lines.append(f"      microsoft: {str(auth_config['microsoft']).lower()},")
+        ts_lines.append(f"      discord: {str(auth_config['discord']).lower()},")
+        ts_lines.append(f"      facebook: {str(auth_config['facebook']).lower()},")
         ts_lines.append("    },")
     ts_lines.append("  },")
     ts_lines.append("  institution: {")
