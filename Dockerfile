@@ -1,15 +1,11 @@
-FROM python:3.12.4
+FROM python:3.12.4-alpine
 
 WORKDIR /ElfraConfigtool
-
-COPY package*.json ./
-
-RUN npm install
 
 COPY . .
 
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 5555
 
 CMD ["python", "run.py"]
