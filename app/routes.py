@@ -2,15 +2,10 @@ from flask import render_template, send_file, Flask, request
 from app.forms import ConfigForm
 from io import BytesIO
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, FormField, FieldList
+from wtforms import StringField, SubmitField, BooleanField, FormField
 from wtforms.validators import DataRequired, Optional
 from app import app
 
-
-
-
-
-# Funktion zum Generieren des TypeScript-Codes
 
 def generate_theme_ts(colors, font, font_provider, auth_config, institution_name, institution_web, topics):
     ts_lines = []
@@ -48,17 +43,12 @@ def generate_theme_ts(colors, font, font_provider, auth_config, institution_name
     ts_lines.append("};")
     return "\n".join(ts_lines)
 
-# Flask route to handle the form submission and generate the TypeScript configuration
 @app.route("/", methods=["GET", "POST"])
 def index():
-    #  Logic to handle GET and POST requests 
-    #  Post request will generate TypeScript code based on the form data
     form = ConfigForm()
-    #  If the form is submitted, validate it and generate the TypeScript code
     if request.method == "POST":
         print("Post startet")
         if form.validate_on_submit():
-            #  Extracting form data
             colors = {
                 "primary": form.primary.data,
                 "secondary": form.secondary.data,
@@ -85,7 +75,6 @@ def index():
             font = form.font.data
             font_provider = form.font_provider.data
             ts_code = generate_theme_ts(colors, font, font_provider, auth_config, institution_name, institution_web, topics)
-        # Nach dem Submit des TypeScript-Codes direkt als Download anbieten
             return send_file(
                 BytesIO(ts_code.encode("utf-8")),
                 mimetype="text/plain",
@@ -93,7 +82,6 @@ def index():
                 download_name="config.ts"
                 )
         else:
-            #  If the form is not valid, render the form with errors
             return render_template("index.html", form=form, errors=form.errors)
     else:
         form.auth.enabled.data = False
@@ -110,6 +98,6 @@ def index():
         form.institution_web.data = ""
         form.topics.append_entry()
         form.topics.entries[0].topic = "Setup Topic"
-        form.topics.entries[0].color = "#FF5733"  # Example color value
+        form.topics.entries[0].color = "#FF5733"
 
     return render_template("index.html", form=form)

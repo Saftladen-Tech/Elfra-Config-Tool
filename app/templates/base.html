@@ -8,12 +8,12 @@
 </head>
 <body class="flex flex-col min-h-screen text-white bg-gray-800">
     <!-- Header -->
-    <header class="flex items-center justify-center space-x-5 mt-16">
-        <img src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="Logo" class="w-24 h-24 rounded-full" />
-        <h1 class="text-6xl font-bold">Elfra Config Tool</h1>
+    <header class="flex items-center justify-center sm:space-x-12 space-x-6 mt-16">
+        <img src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="Logo" class="md:w-24 md:h-24 w-16 h-16 rounded-full" />
+        <h1 class="md:text-6xl sm:text-4xl text-3xl font-bold">Elfra Config Tool</h1>
     </header>
     <!-- Body/Main -->
-    <main class="flex mx-auto mt-8 rounded-lg shadow-lg">
+    <main class="flex sm:mx-20 mx-4 mt-8 rounded-lg shadow-lg">
         {% block content %}
         <!-- Seiteninhalt -->
         {% endblock %}

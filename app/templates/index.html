@@ -1,41 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-<body>
-    <div class="container">
-        <h1 class="text-3xl font-bold mt-6">Welcome to Elfra Config Tool</h1>
+    <div class="flex flex-col w-full">
+        <h1 class="text-3xl font-bold mt-6 mb-4">Welcome to Elfra Config Tool</h1>
         <form method="POST">
             <!---{{ form.hidden_tag() }}-->
             {{ form.csrf_token }}
-            <div class="grid grid-cols-3 gap-1.5">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-1.5">
                 <!-- Farben aus type "color"-->
-                <div class="flex justify-between pr-24">{{ form.primary.label }} {{ form.primary(type="color", value="#669c35", class="form-input") }}</div>
-                <div class="flex justify-between pr-24">{{ form.secondary.label }} {{ form.secondary(type="color", value="#aaaaaa", class="form-input") }}</div>
-                <div class="flex justify-between pr-24">{{ form.accent.label }} {{ form.accent(type="color", value="#fde1af", class="form-input") }}</div>
-                <div class="flex justify-between pr-24">{{ form.dark.label }} {{ form.dark(type="color", value="#0e0e11", class="form-input") }}</div>
-                <div class="flex justify-between pr-24">{{ form.bright.label }} {{ form.bright(type="color", value="#ffffff", class="form-input") }}</div>
-                <div class="flex justify-between pr-24">{{ form.success.label }} {{ form.success(type="color", value="#00dc82", class="form-input") }}</div>
-                <div class="flex justify-between pr-24">{{ form.warn.label }} {{ form.warn(type="color", value="#fcc800", class="form-input") }}</div>
-                <div class="flex justify-between pr-24">{{ form.error.label }} {{ form.error(type="color", value="#ff6467", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.primary.label }} {{ form.primary(type="color", value="#669c35", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.secondary.label }} {{ form.secondary(type="color", value="#aaaaaa", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.accent.label }} {{ form.accent(type="color", value="#fde1af", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.dark.label }} {{ form.dark(type="color", value="#0e0e11", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.bright.label }} {{ form.bright(type="color", value="#ffffff", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.success.label }} {{ form.success(type="color", value="#00dc82", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.warn.label }} {{ form.warn(type="color", value="#fcc800", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.error.label }} {{ form.error(type="color", value="#ff6467", class="form-input") }}</div>
             </div>
                 <!-- Schriftart und Provider -->
-            <div class="grid lg:grid-cols-2 grid-cols-1 gap-1.5 py-2">
-                <div class="flex justify-between mr-20">{{ form.font.label }} {{ form.font(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Roboto") }}</div>
-                <div class="flex justify-between mr-20">{{ form.font_provider.label }} {{ form.font_provider(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Google Fonts") }}</div>
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-1.5 mt-4">
+                <div class="flex justify-between lg:mr-24 mr-0">{{ form.font.label }} {{ form.font(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Roboto") }}</div>
+                <div class="flex justify-between lg:mr-24 mr-0">{{ form.font_provider.label }} {{ form.font_provider(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Google Fonts") }}</div>
                 <!-- Institution -->
-                <div class="flex justify-between mr-20">{{ form.institution_name.label }} {{ form.institution_name(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Saftladen Tech") }}</div>
-                <div class="flex justify-between mr-20">{{ form.institution_web.label }} {{ form.institution_web(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="https://www.github.com/Saftladen-Tech/Elfra") }}</div>
+                <div class="flex justify-between lg:mr-24 mr-0">{{ form.institution_name.label }} {{ form.institution_name(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Saftladen Tech") }}</div>
+                <div class="flex justify-between lg:mr-24 mr-0">{{ form.institution_web.label }} {{ form.institution_web(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="https://www.github.com/Saftladen-Tech/Elfra") }}</div>
             </div>
             <!-- Auth-Konfiguration -->
             <div class="mt-4">
                 <label>{{ form.auth.enabled.label }} {{ form.auth.enabled(id="auth-enabled") }}</label>
                 <div id="auth-fields" style="display:none;" class="grid grid-cols-2 mt-2 space-y-1">
-                    <div class="flex justify-between w-1/8">{{ form.auth.google.label }} {{ form.auth.google() }}</div>
-                    <div class="flex justify-between w-1/8">{{ form.auth.apple.label }} {{ form.auth.apple() }}</div>
-                    <div class="flex justify-between w-1/8">{{ form.auth.github.label }} {{ form.auth.github() }}</div>
-                    <div class="flex justify-between w-1/8 ">{{ form.auth.keycloak.label }} {{ form.auth.keycloak() }}</div>
-                    <div class="flex justify-between w-1/8">{{ form.auth.microsoft.label }} {{ form.auth.microsoft() }}</div>
-                    <div class="flex justify-between w-1/8">{{ form.auth.discord.label }} {{ form.auth.discord() }}</div>
-                    <div class="flex justify-between w-1/8">{{ form.auth.facebook.label }} {{ form.auth.facebook() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.google.label }} {{ form.auth.google() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.apple.label }} {{ form.auth.apple() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.github.label }} {{ form.auth.github() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.keycloak.label }} {{ form.auth.keycloak() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.microsoft.label }} {{ form.auth.microsoft() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.discord.label }} {{ form.auth.discord() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.facebook.label }} {{ form.auth.facebook() }}</div>
                 </div>
             </div>
             <!-- Topics -->
@@ -138,5 +137,5 @@
         }
     });
     </script>
-</body>
+
 {% endblock %}
