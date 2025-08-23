@@ -1,0 +1,8 @@
+services:
+  elfraconfig:
+    build: .
+    image: elfraconfigtool:latest
+    stop_signal: SIGINT
+    ports:
+      - "5555:5555"
+    restart: unless-stopped
