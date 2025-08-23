@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
-
+import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'sehr_wichtiger_schluessel_hier'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 csrf = CSRFProtect(app)
 
 from app.routes import index
