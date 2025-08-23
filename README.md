@@ -1,4 +1,9 @@
 # Elfra-Config-Tool
-Config Tool for ELFRA
 
-npx @tailwindcss/cli -i ./app/static/css/input.css -o ./app/static/css/output.css --watch
+The Elfra Config Tool is a modern Flask web application with a Tailwind CSS frontend. The web interface provides an intuitive form-based configuration experience for generating TypeScript configuration files for ELFRA.
+
+### Start:  
+`python run.py`
+
+### Tailwindcss Dev:
+`npx @tailwindcss/cli -i ./app/static/css/input.css -o ./app/static/css/output.css --watch`
