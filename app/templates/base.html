@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Elfra Config Tool{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+</head>
+<body class="flex flex-col min-h-screen text-white bg-gray-800">
+    <!-- Header -->
+    <header class="flex items-center justify-center sm:space-x-12 space-x-6 mt-16">
+        <img src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="Logo" class="md:w-24 md:h-24 w-16 h-16 rounded-full" />
+        <h1 class="md:text-6xl sm:text-4xl text-3xl font-bold">Elfra Config Tool</h1>
+    </header>
+    <!-- Body/Main -->
+    <main class="flex sm:mx-20 mx-4 mt-8 rounded-lg shadow-lg">
+        {% block content %}
+        <!-- Seiteninhalt -->
+        {% endblock %}
+    </main>
+    <!-- Footer -->
+    <footer class="flex justify-center items-center w-full text-xs text-gray-400 py-8">
+        <p class="text-center space-x-1">
+            <a href="https://github.com/Saftladen-Tech/Elfra-Config-Tool" class="hover:underline" target="_blank" rel="noopener noreferrer">
+                Elfra Config Tool
+            </a>
+            using
+            <a href="https://github.com/Saftladen-Tech/Elfra" class="hover:underline" target="_blank" rel="noopener noreferrer">
+                Elfra Framework
+            </a>
+            - MIT Licensed
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="flex flex-col w-full">
+        <h1 class="text-3xl font-bold mt-6 mb-4">Welcome to Elfra Config Tool</h1>
+        <form method="POST">
+            <!---{{ form.hidden_tag() }}-->
+            {{ form.csrf_token }}
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-1.5">
+                <!-- Farben aus type "color"-->
+                <div class="flex justify-between pr-36">{{ form.primary.label }} {{ form.primary(type="color", value="#669c35", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.secondary.label }} {{ form.secondary(type="color", value="#aaaaaa", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.accent.label }} {{ form.accent(type="color", value="#fde1af", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.dark.label }} {{ form.dark(type="color", value="#0e0e11", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.bright.label }} {{ form.bright(type="color", value="#ffffff", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.success.label }} {{ form.success(type="color", value="#00dc82", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.warn.label }} {{ form.warn(type="color", value="#fcc800", class="form-input") }}</div>
+                <div class="flex justify-between pr-36">{{ form.error.label }} {{ form.error(type="color", value="#ff6467", class="form-input") }}</div>
+            </div>
+                <!-- Schriftart und Provider -->
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-1.5 mt-4">
+                <div class="flex justify-between lg:mr-24 mr-0">{{ form.font.label }} {{ form.font(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Roboto") }}</div>
+                <div class="flex justify-between lg:mr-24 mr-0">{{ form.font_provider.label }} {{ form.font_provider(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Google Fonts") }}</div>
+                <!-- Institution -->
+                <div class="flex justify-between lg:mr-24 mr-0">{{ form.institution_name.label }} {{ form.institution_name(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="Saftladen Tech") }}</div>
+                <div class="flex justify-between lg:mr-24 mr-0">{{ form.institution_web.label }} {{ form.institution_web(class="form-input bg-gray-400 rounded-md px-1 placeholder:text-gray-600", placeholder="https://www.github.com/Saftladen-Tech/Elfra") }}</div>
+            </div>
+            <!-- Auth-Konfiguration -->
+            <div class="mt-4">
+                <label>{{ form.auth.enabled.label }} {{ form.auth.enabled(id="auth-enabled") }}</label>
+                <div id="auth-fields" style="display:none;" class="grid grid-cols-2 mt-2 space-y-1">
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.google.label }} {{ form.auth.google() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.apple.label }} {{ form.auth.apple() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.github.label }} {{ form.auth.github() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.keycloak.label }} {{ form.auth.keycloak() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.microsoft.label }} {{ form.auth.microsoft() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.discord.label }} {{ form.auth.discord() }}</div>
+                    <div class="flex justify-between lg:w-1/8 w-3/8">{{ form.auth.facebook.label }} {{ form.auth.facebook() }}</div>
+                </div>
+            </div>
+            <!-- Topics -->
+            <div class="mt-4">
+                <label>Course name:</label>
+                <div id="topics-list">
+                    <!-- Hier werden dynamisch Topic-Felder per JS eingefügt -->
+                    <div class="">
+                        <input name="topics-0-topic" placeholder="Name" class="bg-gray-400 rounded-md px-1 placeholder:text-gray-600"/>
+                        <select name="topics-0-color" class="bg-gray-400 rounded-md px-1 text-gray-600">
+                            <option value="amber">Amber</option>
+                            <option value="blue">Blau</option>
+                            <option value="cyan">Cyan</option>
+                            <option value="emerald">Emeraude</option>
+                            <option value="fuchsia">Fuchsia</option>
+                            <option value="gray">Grau</option>
+                            <option value="green">Grün</option>
+                            <option value="indigo">Indigo</option>
+                            <option value="lime">Limette</option>
+                            <option value="neutral">Neutral</option>
+                            <option value="orange">Orange</option>
+                            <option value="pink">Rosa</option>
+                            <option value="purple">Lila</option>
+                            <option value="red">Rot</option>
+                            <option value="rose">Rosen</option>
+                            <option value="sky">Himmel</option>
+                            <option value="slate">Schiefer</option>
+                            <option value="stone">Stein</option>
+                            <option value="teal">Teal</option>
+                            <option value="violet">Violett</option>
+                            <option value="yellow">Gelb</option>
+                            <option value="zinc">Zink</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" id="add-topic" class="btn bg-gray-400 rounded-md px-2 my-2 text-black">Add Course</button>
+            </div>
+            <!-- Mit dem Submit wird die generierte Datei gespeichert -->
+            <!-- Platzhalter: Hier wird per Flask-Route die Datei generiert und als Download ausgeliefert -->
+            <div class="mt-6">
+                {{ form.submit(class="btn btn-primary bg-gray-400 rounded-md px-2 my-2 text-black") }} 
+            </div>
+        </form>
+
+        {% if errors %}
+            <div class="text-red-500">
+                {% for field, error_list in errors.items() %}
+                    <div>{{ field }}: {{ error_list|join(', ') }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addTopicButton = document.getElementById('add-topic');
+        const topicsList = document.getElementById('topics-list');
+        let topicIndex = 1;
+
+        addTopicButton.addEventListener('click', function() {
+            const newTopicDiv = document.createElement('div');
+            newTopicDiv.innerHTML = `
+                <input name="topics-${topicIndex}-topic" placeholder="Name" class="bg-gray-400 rounded-md px-1 placeholder:text-gray-600 mt-2"/>
+                <select name="topics-${topicIndex}-color" class="bg-gray-400 rounded-md px-1 text-gray-600 mt-2">
+                    <option value="amber">Amber</option>
+                    <option value="blue">Blau</option>
+                    <option value="cyan">Cyan</option>
+                    <option value="emerald">Emeraude</option>
+                    <option value="fuchsia">Fuchsia</option>
+                    <option value="gray">Grau</option>
+                    <option value="green">Grün</option>
+                    <option value="indigo">Indigo</option>
+                    <option value="lime">Limette</option>
+                    <option value="neutral">Neutral</option>
+                    <option value="orange">Orange</option>
+                    <option value="pink">Rosa</option>
+                    <option value="purple">Lila</option>
+                    <option value="red">Rot</option>
+                    <option value="rose">Rosen</option>
+                    <option value="sky">Himmel</option>
+                    <option value="slate">Schiefer</option>
+                    <option value="stone">Stein</option>
+                    <option value="teal">Teal</option>
+                    <option value="violet">Violett</option>
+                    <option value="yellow">Gelb</option>
+                    <option value="zinc">Zink</option>
+                </select>
+            `;
+            topicsList.appendChild(newTopicDiv);
+            topicIndex++;
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const authEnabled = document.getElementById('auth-enabled');
+        const authFields = document.getElementById('auth-fields');
+        function toggleAuthFields() {
+            authFields.style.display = authEnabled.checked ? 'block' : 'none';
+        }
+        if(authEnabled) {
+            authEnabled.addEventListener('change', toggleAuthFields);
+            toggleAuthFields();
+        }
+    });
+    </script>
+
+{% endblock %}
