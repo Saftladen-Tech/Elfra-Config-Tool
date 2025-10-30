@@ -215,5 +215,5 @@ testcases = [
 
 @pytest.mark.parametrize("testinput,expected", testcases)
 def test_generatefile(testinput, expected):
-    assert rt.generate_theme_ts(*testinput)==expected
+    assert rt.generate_theme_ts(*testinput) == expected
     
